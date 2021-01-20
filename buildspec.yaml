@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - "apt install unzip -y"
+      - "wget https://releases.hashicorp.com/terraform/0.13.5/terraform_0.13.5_linux_amd64.zip"
+      - "unzip terraform_0.13.5_linux_amd64.zip"
+      - "mv terraform /usr/local/bin/"
+
+  build:
+    commands:
+      - bin/tf-deploy $TF_DIR plan
+
+  post_build:
+    commands:
+      - echo terraform plan completed on `date`
+
